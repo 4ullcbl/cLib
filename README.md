@@ -1,8 +1,8 @@
-# cLib 🧩
+# cLib 🧩 - Universal Utility Library for Spigot/Paper Plugins
 
-A universal utility library for Spigot/Paper plugins that simplifies plugin development and provides common functionality.
+A powerful utility library designed to simplify Minecraft plugin development by providing common functionality, configuration management, update checking, and customizable actions system.
 
-## 📦 Installation
+## 📦 Quick Installation & Usage
 
 ### 1. Add as Dependency
 
@@ -30,16 +30,9 @@ dependencies {
     compileOnly 'com.github.4ullcbl:cLib:25w36a'
 }
 ```
-### 2. Start use!
-
-
-
 
 ## 🔎How get the last version?
 jitpack -> https://jitpack.io/#4ullcbl/cLib/25w36a
-
-
-
 
 
 ## Custom config example
