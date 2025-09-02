@@ -1,3 +1,8 @@
 
 # проверка наличий обновлений на гитхабе
 update_check: true
+
+# /clib тест команда на проверку работы actions
+actions:
+  - "[SOUND] UI_BUTTON_CLICK 1 1"
+  - "[PARTICLE] FLAME"

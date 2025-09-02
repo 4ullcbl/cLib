@@ -1,4 +1,4 @@
-package su.trident.clib.github;
+package su.trident.clib.checker.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
@@ -12,22 +12,23 @@ import java.net.HttpURLConnection;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import su.trident.clib.checker.api.UpdateChecker;
 
 import java.net.URL;
 
 @RequiredArgsConstructor
-public class UpdateChecker
+public class GitHubChecker implements UpdateChecker
 {
     private final String githubRepo;
     private final JavaPlugin plugin;
 
-    public void checkLast()
+    @Override
+    public void start()
     {
-        this.plugin.getLogger().info(ChatColor.GOLD + "Проверка обновлений...");
+        this.plugin.getLogger().info(ChatColor.GOLD + "start update check task...");
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () ->
         {
-
             try {
                 final URL url = new URL("https://api.github.com/repos/" + githubRepo + "/releases/latest");
                 final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -43,7 +44,7 @@ public class UpdateChecker
                     versionInfoMessages(currentVersion, latestVersion);
 
                 } else {
-                    this.plugin.getLogger().info(ChatColor.DARK_RED + "Не удалось проверить обновление. Error: " + conn.getResponseCode());
+                    this.plugin.getLogger().info("failed check update, error code: " + conn.getResponseCode());
                 }
 
                 conn.disconnect();
@@ -57,10 +58,10 @@ public class UpdateChecker
     private void versionInfoMessages(String currentVersion, String latestVersion)
     {
         if (!currentVersion.equalsIgnoreCase(latestVersion)) {
-            this.plugin.getLogger().info(ChatColor.GREEN + "Найдено обновление: " + latestVersion + " (текущая: " + currentVersion + ")");
-            this.plugin.getLogger().info(ChatColor.GREEN + "Ссылка на скачивание: https://github.com/" + githubRepo + "/releases/tag/" + latestVersion);
+            this.plugin.getLogger().info("found new update: " + latestVersion + " (current: " + currentVersion + ")");
+            this.plugin.getLogger().info("download link: https://github.com/" + githubRepo + "/releases/tag/" + latestVersion);
         } else {
-            this.plugin.getLogger().info(ChatColor.AQUA + "Установленна последняя версия: " + currentVersion);
+            this.plugin.getLogger().info("you have last version: " + currentVersion + "!");
         }
     }
 }

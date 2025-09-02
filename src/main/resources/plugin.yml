@@ -2,3 +2,7 @@ name: cLib
 version: '${project.version}'
 main: su.trident.clib.CLib
 api-version: '1.16'
+
+commands:
+  clib:
+    permission: trident.admin
