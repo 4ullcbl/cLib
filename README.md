@@ -71,7 +71,7 @@ actions:
   - "[PARTICLE] FLAME"
 ```
 
-### make custom(write in main class):
+### Make custom actions (write in main class):
 
 ```java
     ActionRegister.register("[SOUND]")
