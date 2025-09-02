@@ -19,7 +19,21 @@ A universal utility library for Spigot/Paper plugins that simplifies plugin deve
     <version>25w36a</version>
 </dependency>
 ```
+
+**Gradle**
+```gradle
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly 'com.github.4ullcbl:cLib:25w36a'
+}
+```
 ### 2. Start use!
+
+## How get the last version?
+jitpack -> https://jitpack.io/#4ullcbl/cLib/25w36a
 
 ## Custom config example
 
