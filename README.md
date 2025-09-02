@@ -90,3 +90,14 @@ actions:
 
                 });
 ```
+
+### Easy execute!
+```java
+    final Player player = (Player) sender;
+        
+        for (String line: config.getStringList("actions")) {
+            ActionRegister.execute(line, new ActionContext(player.getLocation()));
+
+            System.out.println("успешно выполнено: " + line);
+        }
+```
