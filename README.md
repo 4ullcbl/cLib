@@ -19,3 +19,4 @@ A universal utility library for Spigot/Paper plugins that simplifies plugin deve
     <version>25w36a</version>
 </dependency>
 ```
+### 2. Start use!
