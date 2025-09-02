@@ -63,3 +63,30 @@ public final class CLib extends JavaPlugin {
     }
 }
 ```
+
+## Config actions:
+```yaml
+actions:
+  - "[SOUND] UI_BUTTON_CLICK 1 1"
+  - "[PARTICLE] FLAME"
+```
+
+### make custom(write in main class):
+
+```java
+    ActionRegister.register("[SOUND]")
+                .arguments("name")
+                .arguments("volume")
+                .arguments("pitch")
+                .executor((arguments, loc) ->
+                {
+                    if (loc.getWorld() == null) return;
+
+                    final Sound sound = Sound.valueOf(arguments.get("name"));
+                    final int volume = arguments.getParseInt("volume");
+                    final int pitch = arguments.getParseInt("pitch");
+
+                    loc.getWorld().playSound(loc, sound, volume, pitch);
+
+                });
+```
