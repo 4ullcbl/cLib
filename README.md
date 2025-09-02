@@ -32,7 +32,9 @@ dependencies {
 ```
 ### 2. Start use!
 
-## How get the last version?
+#
+
+## 🔎How get the last version?
 jitpack -> https://jitpack.io/#4ullcbl/cLib/25w36a
 
 ## Custom config example
