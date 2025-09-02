@@ -1,10 +1,16 @@
 package su.trident.clib.action.context;
 
-import lombok.Data;
+import lombok.Getter;
 import org.bukkit.Location;
 
-@Data
-public class ActionContext
+@Getter
+@Deprecated
+public class ActionContext extends Context
 {
     private final Location location;
+
+    public ActionContext(Location location)
+    {
+        this.location = location;
+    }
 }

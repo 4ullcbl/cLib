@@ -1,6 +1,6 @@
 package su.trident.clib.action.core;
 
-import su.trident.clib.action.context.ActionContext;
+import su.trident.clib.action.context.Context;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,7 +18,7 @@ public class ActionRegister
         return action;
     }
 
-    public static void execute(String line, ActionContext context)
+    public static void execute(String line, Context context)
     {
         final String[] parts = line.split(" ");
 
@@ -28,6 +28,7 @@ public class ActionRegister
         final Action currentAction = actions.get(key);
 
         if (currentAction == null) return;
-        currentAction.run(Arrays.copyOfRange(parts, 1, parts.length), context);
+
+        currentAction.run(line, Arrays.copyOfRange(parts, 1, parts.length), context);
     }
 }

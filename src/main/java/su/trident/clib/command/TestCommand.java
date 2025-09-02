@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import su.trident.clib.CLib;
 import su.trident.clib.action.context.ActionContext;
+import su.trident.clib.action.context.PlayerActionContext;
 import su.trident.clib.action.core.ActionRegister;
 
 public class TestCommand implements CommandExecutor
@@ -29,9 +30,9 @@ public class TestCommand implements CommandExecutor
         final Player player = (Player) sender;
 
         for (String line: config.getStringList("actions")) {
-            ActionRegister.execute(line, new ActionContext(player.getLocation()));
+            ActionRegister.execute(line, new PlayerActionContext(player));
 
-            System.out.println("успешно выполнено: " + line);
+            player.sendMessage("Успешно выполнено: " + line);
         }
 
         player.sendMessage(CLib.getMessagePrefix() + "successfully execute!");

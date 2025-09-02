@@ -12,7 +12,6 @@ public final class CLib extends JavaPlugin
 {
     private static final String MESSAGE_PREFIX = "cLib -> ";
 
-    private DefaultActionRegister actionRegister;
     private CommandRegister commandRegister;
 
     @Override
@@ -24,9 +23,8 @@ public final class CLib extends JavaPlugin
         commandRegister = new CommandRegister(this);
         commandRegister.register("clib", new TestCommand(getConfig()));
 
-        actionRegister = new DefaultActionRegister();
-        actionRegister.register();
-
+        DefaultActionRegister actionRegister = new DefaultActionRegister();
+        actionRegister.registerAll();
 
     }
 

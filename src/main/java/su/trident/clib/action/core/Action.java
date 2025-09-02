@@ -2,7 +2,10 @@ package su.trident.clib.action.core;
 
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import su.trident.clib.action.context.ActionContext;
+import su.trident.clib.action.context.Context;
+import su.trident.clib.action.context.PlayerActionContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,7 @@ public class Action
     private final String key;
     private final List<String> arguments = new ArrayList<>();
     private BiConsumer<ActionArguments, Location> executor;
+    private BiConsumer<ActionArguments, Player> playerExecutor;
 
     public Action arguments(String key)
     {
@@ -21,21 +25,29 @@ public class Action
         return this;
     }
 
+    @Deprecated
     public void executor(BiConsumer<ActionArguments, Location> executor)
     {
         this.executor = executor;
     }
 
-    public void run(String[] values, ActionContext context)
+    public void playerExecutor(BiConsumer<ActionArguments, Player> playerExecutor)
     {
-        final ActionArguments actionArgs = new ActionArguments();
+        this.playerExecutor = playerExecutor;
+    }
+
+    public void run(String rawInput, String[] values, Context context)
+    {
+        final ActionArguments actionArgs = new ActionArguments(rawInput);
 
         for (int i = 0; i < Math.min(values.length, arguments.size()); i++) {
             actionArgs.put(arguments.get(i), values[i]);
         }
 
-        if (executor != null) {
-            executor.accept(actionArgs, context.getLocation());
+        if (context instanceof ActionContext) {
+            executor.accept(actionArgs, ((ActionContext) context).getLocation());
+        } else if (context instanceof PlayerActionContext) {
+            playerExecutor.accept(actionArgs, ((PlayerActionContext) context).getPlayer());
         }
     }
 }
