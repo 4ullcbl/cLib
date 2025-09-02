@@ -87,32 +87,34 @@ actions:
 ### Make custom actions (write in main class)
 
 ```java
-    ActionRegister.register("[SOUND]") // action name
-                .arguments("name") // arguments
-                .arguments("volume")
-                .arguments("pitch")
-                .executor((arguments, loc) ->
-                {
-                    //execute logic
-                    if (loc.getWorld() == null) return;
+   ActionRegister.register("[SOUND]") // The unique identifier of the action
+        .arguments("name")         // Sound name
+        .arguments("volume")       // Volume level (usually 0-100)
+        .arguments("pitch")        // Volume pitch (usualy 0-2 where 1 is normal)
+        .executor((arguments, loc) ->
+        {
+            Make sure that the location is in a valid world
+            if (loc.getWorld() == null) return;
 
-                    final Sound sound = Sound.valueOf(arguments.get("name"));
-                    final int volume = arguments.getParseInt("volume");
-                    final int pitch = arguments.getParseInt("pitch");
+            // Get and convert arguments
+            final Sound sound = Sound.valueOf(arguments.get("name"));
+            final int volume = arguments.getParseInt("volume");
+            final int pitch = arguments.getParseInt("pitch");
 
-                    loc.getWorld().playSound(loc, sound, volume, pitch);
-
-                });
+            // Playing the sound in the specified location
+            loc.getWorld().playSound(loc, sound, volume, pitch);
+        });
 ```
 
 ### Easy execute!
 all actions specified in the config are played automatically
 ```java
-    //get player
+   // Get the player who executed the command
     final Player player = (Player) sender;
-        
-        for (String line: config.getStringList("actions")) {
-            // execute your actions! 
-            ActionRegister.execute(line, new ActionContext(player.getLocation()));
-        }
+
+    // Retrieve the list of action strings from the configuration
+    for (String line : config.getStringList("actions")) {
+        // Execute each action with the player's current location as context
+        ActionRegister.execute(line, new ActionContext(player.getLocation()));
+    }
 ```
