@@ -64,22 +64,24 @@ public final class CLib extends JavaPlugin {
 }
 ```
 
-## Config actions:
+## Config actions
+You can use the built-in actions or create your own using ActionRegister
 ```yaml
 actions:
   - "[SOUND] UI_BUTTON_CLICK 1 1"
   - "[PARTICLE] FLAME"
 ```
 
-### Make custom actions (write in main class):
+### Make custom actions (write in main class)
 
 ```java
-    ActionRegister.register("[SOUND]")
-                .arguments("name")
+    ActionRegister.register("[SOUND]") // action name
+                .arguments("name") // arguments
                 .arguments("volume")
                 .arguments("pitch")
                 .executor((arguments, loc) ->
                 {
+                    //execute logic
                     if (loc.getWorld() == null) return;
 
                     final Sound sound = Sound.valueOf(arguments.get("name"));
@@ -93,11 +95,11 @@ actions:
 
 ### Easy execute!
 ```java
+    //get player
     final Player player = (Player) sender;
         
         for (String line: config.getStringList("actions")) {
+            // execute your actions! 
             ActionRegister.execute(line, new ActionContext(player.getLocation()));
-
-            System.out.println("успешно выполнено: " + line);
         }
 ```
