@@ -94,6 +94,7 @@ actions:
 ```
 
 ### Easy execute!
+all actions specified in the config are played automatically
 ```java
     //get player
     final Player player = (Player) sender;
