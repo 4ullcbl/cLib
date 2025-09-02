@@ -32,11 +32,8 @@ dependencies {
 }
 ```
 
-## 🔎How get the last version?
-jitpack -> https://jitpack.io/#4ullcbl/cLib/25w36a
-
-
 ## Custom config example
+Make it easier to create configs and retrieve objects from there
 
 ```java
 public final class CLib extends JavaPlugin {
@@ -64,7 +61,7 @@ public final class CLib extends JavaPlugin {
 ```
 
 ## Update check example
-
+Add an update check on your github! so that users can download the latest versions!
 ```java
 public final class CLib extends JavaPlugin {
 
