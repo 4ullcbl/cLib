@@ -4,7 +4,7 @@ A powerful utility library designed to simplify Minecraft plugin development by 
 
 ## 📦 Quick Installation & Usage
 
-### 1. Add as Dependency
+### 1. Add as Dependency [![](https://jitpack.io/v/4ullcbl/cLib.svg)](https://jitpack.io/#4ullcbl/cLib)
 
 **Maven:**
 ```xml
