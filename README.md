@@ -21,7 +21,7 @@ A universal utility library for Spigot/Paper plugins that simplifies plugin deve
 ```
 ### 2. Start use!
 
-## Code Example
+## Custom config example
 
 ```java
 public final class CLib extends JavaPlugin {
@@ -46,3 +46,20 @@ public final class CLib extends JavaPlugin {
         getLogger().info("Message from config: " + messages.getMessage("hi_message", "default message"));
     }
 }
+```
+
+## Update check example
+
+```java
+public final class CLib extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        // Create update checker instance for GitHub repository
+        final UpdateChecker updateChecker = new GitHubChecker("4ullcbl/cLib", this);
+        
+        // Start asynchronous update check against latest GitHub tag
+        updateChecker.start();
+    }
+}
+```
