@@ -6,13 +6,13 @@
 
   <groupId>su.trident</groupId>
   <artifactId>cLib</artifactId>
-  <version>25w36a</version>
+  <version>25w36e</version>
   <packaging>jar</packaging>
 
   <name>cLib</name>
 
   <properties>
-    <java.version>1.8</java.version>
+    <java.version>16</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 

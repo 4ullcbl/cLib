@@ -1,5 +1,6 @@
 package su.trident.clib.action.core;
 
+import lombok.Getter;
 import su.trident.clib.action.context.Context;
 
 import java.util.Arrays;
@@ -8,6 +9,7 @@ import java.util.Map;
 
 public class ActionRegister
 {
+    @Getter
     private static final Map<String, Action> actions = new HashMap<>();
 
     public static Action register(String key)
