@@ -19,16 +19,12 @@ public class ActionExecutor extends ArgumentExecutor
     @Override
     public String getUsage()
     {
-        return "/clib [action]";
+        return "/clib {action}";
     }
 
     @Override
     public void execute(Player player, String[] args)
     {
-        if (args.length == 0) {
-            sendHelpMessage(player);
-            return;
-        }
 
         final String line = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
 

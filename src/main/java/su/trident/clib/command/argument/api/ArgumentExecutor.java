@@ -17,7 +17,7 @@ public abstract class ArgumentExecutor
 
     public void sendHelpMessage(Player player)
     {
-        player.sendMessage(CLib.getMessagePrefix() + "usage: " + this.getUsage() + "please, try again.");
+        player.sendMessage(CLib.getMessagePrefix() + "usage: " + this.getUsage() + " | please, try again.");
     }
 
     public void sendMessage(Player player, String message) {

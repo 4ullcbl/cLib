@@ -6,6 +6,8 @@ import su.trident.clib.action.register.DefaultActionRegister;
 import su.trident.clib.checker.api.UpdateChecker;
 import su.trident.clib.checker.impl.GitHubChecker;
 import su.trident.clib.command.MainCommand;
+import su.trident.clib.manager.color.api.ColorParser;
+import su.trident.clib.manager.color.impl.HEXParser;
 import su.trident.clib.menu.listener.InventoryListener;
 import su.trident.clib.register.CommandRegister;
 
@@ -16,6 +18,7 @@ public final class CLib extends JavaPlugin
 
     private CommandRegister commandRegister;
     private DefaultActionRegister actionRegister;
+    private ColorParser hexParser;
 
     @Override
     public void onEnable()
@@ -23,11 +26,14 @@ public final class CLib extends JavaPlugin
         saveDefaultConfig();
         startUpdateCheck();
 
-        commandRegister = new CommandRegister(this);
-        commandRegister.register("clib", new MainCommand(getConfig()));
 
         actionRegister = new DefaultActionRegister();
         actionRegister.registerAll();
+
+        hexParser = new HEXParser();
+
+        commandRegister = new CommandRegister(this);
+        commandRegister.register("clib", new MainCommand(getConfig(), getHexParser()));
 
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
     }
@@ -35,9 +41,9 @@ public final class CLib extends JavaPlugin
     @Override
     public void onDisable()
     {
-
         commandRegister = null;
         actionRegister = null;
+        hexParser = null;
     }
 
 

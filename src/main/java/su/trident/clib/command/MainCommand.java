@@ -9,7 +9,8 @@ import su.trident.clib.CLib;
 import su.trident.clib.action.core.ActionRegister;
 import su.trident.clib.command.argument.api.ArgumentExecutor;
 import su.trident.clib.command.argument.impl.ActionExecutor;
-import su.trident.clib.command.argument.impl.MenuCommand;
+import su.trident.clib.command.argument.impl.ColorParserArgument;
+import su.trident.clib.manager.color.api.ColorParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,14 +20,16 @@ import java.util.Map;
 public class MainCommand implements TabExecutor
 {
     private final FileConfiguration config;
+    private final ColorParser parser;
     @SuppressWarnings("all")
     private final Map<String, ArgumentExecutor> argumentExecutors = new HashMap<>();
 
-    public MainCommand(FileConfiguration config)
+    public MainCommand(FileConfiguration config, ColorParser parser)
     {
         this.config = config;
+        this.parser = parser;
         argumentExecutors.put("action", new ActionExecutor());
-        argumentExecutors.put("menu", new MenuCommand());
+        argumentExecutors.put("parse", new ColorParserArgument(parser));
     }
 
     @Override
@@ -42,11 +45,12 @@ public class MainCommand implements TabExecutor
             return true;
         }
 
-        final Player player = (Player) sender;
         final String message = args[0];
+        final Player player = (Player) sender;
 
         try {
             argumentExecutors.get(message).execute(player, args);
+            return true;
         } catch (Exception e) {
             if (message == null) {
                 sender.sendMessage(CLib.getMessagePrefix() + "please put arguments!");
@@ -54,9 +58,8 @@ public class MainCommand implements TabExecutor
             }
 
             sender.sendMessage(CLib.getMessagePrefix() + "no executor was found for argument {" + message + "}");
+            return true;
         }
-
-        return true;
     }
 
     @Override

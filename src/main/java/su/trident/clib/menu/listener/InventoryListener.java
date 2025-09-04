@@ -14,9 +14,11 @@ public class InventoryListener implements Listener
     {
         final Inventory inventory = event.getInventory();
 
-        if (!(inventory.getHolder() instanceof final Menu menu))
+        if (!(inventory.getHolder() instanceof Menu))
             return;
 
+
+        final Menu menu = (Menu) inventory.getHolder();
         menu.click((Player) event.getWhoClicked(), event.getSlot());
 
         if (menu.isCanceled())

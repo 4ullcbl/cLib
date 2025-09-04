@@ -6,7 +6,7 @@
 
   <groupId>su.trident</groupId>
   <artifactId>cLib</artifactId>
-  <version>25w36e</version>
+  <version>25w36d</version>
   <packaging>jar</packaging>
 
   <name>cLib</name>
@@ -23,8 +23,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <source>16</source>
+          <target>16</target>
         </configuration>
       </plugin>
       <plugin>
@@ -58,10 +58,6 @@
           <id>sonatype</id>
           <url>https://oss.sonatype.org/content/groups/public/</url>
       </repository>
-      <repository>
-          <id>jitpack.io</id>
-          <url>https://jitpack.io</url>
-      </repository>
   </repositories>
 
   <dependencies>
@@ -82,11 +78,6 @@
           <artifactId>json-simple</artifactId>
           <version>1.1.1</version>
           <scope>compile</scope>
-      </dependency>
-      <dependency>
-          <groupId>com.github.4ullcbl</groupId>
-          <artifactId>cLib</artifactId>
-          <version>25w36a</version>
       </dependency>
   </dependencies>
 </project>
