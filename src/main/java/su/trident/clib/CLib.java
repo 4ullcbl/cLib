@@ -1,6 +1,7 @@
 package su.trident.clib;
 
 import lombok.Getter;
+import org.bukkit.Particle;
 import org.bukkit.plugin.java.JavaPlugin;
 import su.trident.clib.action.register.DefaultActionRegister;
 import su.trident.clib.checker.api.UpdateChecker;
@@ -8,6 +9,7 @@ import su.trident.clib.checker.impl.GitHubChecker;
 import su.trident.clib.command.MainCommand;
 import su.trident.clib.manager.color.api.ColorParser;
 import su.trident.clib.manager.color.impl.HEXParser;
+import su.trident.clib.manager.particle.ParticleBuilder;
 import su.trident.clib.menu.listener.InventoryListener;
 import su.trident.clib.register.CommandRegister;
 

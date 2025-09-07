@@ -6,7 +6,7 @@
 
   <groupId>su.trident</groupId>
   <artifactId>cLib</artifactId>
-  <version>25w36d</version>
+  <version>25w36d-configfix</version>
   <packaging>jar</packaging>
 
   <name>cLib</name>

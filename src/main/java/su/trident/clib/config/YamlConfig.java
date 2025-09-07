@@ -34,8 +34,8 @@ public class YamlConfig
     {
         this.plugin = plugin;
         this.file = file;
-        this.config = YamlConfiguration.loadConfiguration(file);
         saveConfig(file.getName());
+        this.config = YamlConfiguration.loadConfiguration(file);
     }
 
     public YamlConfig(String name, JavaPlugin plugin)
@@ -43,8 +43,8 @@ public class YamlConfig
         this.plugin = plugin;
         this.name = name;
         this.file = new File(plugin.getDataFolder(), toYamlFormat(name));
-        this.config = YamlConfiguration.loadConfiguration(file);
         saveConfig();
+        this.config = YamlConfiguration.loadConfiguration(file);
     }
 
     public YamlConfig(String name, String addedPath, JavaPlugin plugin)
@@ -55,8 +55,8 @@ public class YamlConfig
         final File directory = createDirectory(addedPath, plugin);
 
         this.file = new File(directory, toYamlFormat(name));
-        this.config = YamlConfiguration.loadConfiguration(file);
         saveDirectoryConfig();
+        this.config = YamlConfiguration.loadConfiguration(file);
     }
 
     private File createDirectory(String addedPath, JavaPlugin plugin)
