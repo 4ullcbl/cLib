@@ -17,7 +17,7 @@ A powerful utility library designed to simplify Minecraft plugin development by 
 <dependency>
     <groupId>com.github.4ullcbl</groupId>
     <artifactId>cLib</artifactId>
-    <version>25w36d</version>
+    <version>25w37a</version>
 </dependency>
 ```
 
