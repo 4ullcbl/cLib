@@ -1,51 +1,67 @@
 package su.trident.clib;
 
 import lombok.Getter;
-import org.bukkit.Particle;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
-import su.trident.clib.action.register.DefaultActionRegister;
-import su.trident.clib.checker.api.UpdateChecker;
-import su.trident.clib.checker.impl.GitHubChecker;
-import su.trident.clib.command.MainCommand;
-import su.trident.clib.manager.color.api.ColorParser;
-import su.trident.clib.manager.color.impl.HEXParser;
-import su.trident.clib.manager.particle.ParticleBuilder;
-import su.trident.clib.menu.listener.InventoryListener;
-import su.trident.clib.register.CommandRegister;
+import su.trident.clib.api.CLibAPI;
+import su.trident.clib.api.menu.Menu;
+import su.trident.clib.impl.CLibImpl;
+import su.trident.clib.api.checker.UpdateChecker;
+import su.trident.clib.impl.checker.GitHubChecker;
+import su.trident.clib.impl.command.MainCommand;
+import su.trident.clib.api.color.ColorParser;
+import su.trident.clib.impl.manager.color.HEXParser;
+import su.trident.clib.impl.menu.DefaultMenu;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 @Getter
 public final class CLib extends JavaPlugin
 {
     private static final String MESSAGE_PREFIX = "cLib -> ";
 
-    private CommandRegister commandRegister;
-    private DefaultActionRegister actionRegister;
-    private ColorParser hexParser;
+    @Getter
+    private CLibAPI cLibAPI;
 
     @Override
     public void onEnable()
     {
         saveDefaultConfig();
+
+        final ColorParser hexParser = new HEXParser();
+        registerCommand("clib", new MainCommand(hexParser));
+
+        cLibAPI = new CLibImpl(this);
+        Bukkit.getServicesManager().register(CLibAPI.class, cLibAPI, this, ServicePriority.Normal);
+
         startUpdateCheck();
-
-
-        actionRegister = new DefaultActionRegister();
-        actionRegister.registerAll();
-
-        hexParser = new HEXParser();
-
-        commandRegister = new CommandRegister(this);
-        commandRegister.register("clib", new MainCommand(getConfig(), getHexParser()));
-
-        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+        saveDefaultConfig();
     }
 
     @Override
     public void onDisable()
     {
-        commandRegister = null;
-        actionRegister = null;
-        hexParser = null;
+    }
+
+    private void registerCommand(String s, CommandExecutor command)
+    {
+        Optional.ofNullable(getCommand(s))
+                .orElseThrow()
+                .setExecutor(command);
+    }
+
+    private void registerListners(Listener... listeners)
+    {
+        Arrays.stream(listeners).forEach(l -> getServer().getPluginManager().registerEvents(l, this));
     }
 
 
@@ -57,8 +73,10 @@ public final class CLib extends JavaPlugin
         }
     }
 
-    public static String getMessagePrefix() {
+    public static String getMessagePrefix()
+    {
         return MESSAGE_PREFIX;
     }
+
 
 }
